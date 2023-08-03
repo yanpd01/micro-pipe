@@ -24,12 +24,28 @@ jobs:
             VERSION=${GITHUB_REF#refs/tags/v}
           fi
           echo "tags=${VERSION}" >> "$GITHUB_ENV"
+          echo "tags2=002" >> "$GITHUB_OUTPUT"
       - name: s02
         run: |
           echo ${{ env.tags }}
           echo "${{ env.tags }}"
-          echo " ${{ steps.s01.outputs.tags }}"
-          
+          echo " ${{ steps.s01.outputs.tags2 }}"
+
+
+
+
+  get-tags2:
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v3
+      - name: s03
+        run: |
+          echo ${{ env.tags }}
+          echo "${{ env.tags }}"
+          echo " ${{ steps.s01.outputs.tags2 }}"
+
   # push-docker-hub:
   #   needs: get-tags
   #   runs-on: ubuntu-20.04
