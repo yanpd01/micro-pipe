@@ -22,7 +22,7 @@ jobs:
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
           fi
-          echo ::set-env name=tags::${VERSION}    
+          echo "tags=${VERSION}" >> "$GITHUB_ENV"
           
   push-docker-hub:
     needs: get-tags
