@@ -8,15 +8,12 @@ on:
 
 env:
   IMAGE_NAME: micro-pipe #这是您的镜像名
-  VERSION: ${{ needs.get-tags.outputs.tags }}
 
 jobs:
   get-tags:
     runs-on: ubuntu-20.04
     env:
       TZ: Asia/Shanghai
-    outputs:
-      tags: ${{ steps.set-output-id.outputs.tags }}
     steps:
       - uses: actions/checkout@v3
       - name: Set output variable
@@ -47,5 +44,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.tags }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
