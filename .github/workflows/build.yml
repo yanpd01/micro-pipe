@@ -17,13 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Set output variable
-        id: set-output-id
         run: |
           VERSION=edge
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
           fi
-          echo "tags=${VERSION}" >> $GITHUB_ENV # 使用环境文件设置输出变量
+          echo ::set-env name=tags::${VERSION}    
           
   push-docker-hub:
     needs: get-tags
