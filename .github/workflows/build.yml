@@ -24,7 +24,7 @@ jobs:
             VERSION=${GITHUB_REF#refs/tags/v}
           fi
           echo "tags=${VERSION}" >> "$GITHUB_ENV"
-      - names: s02
+      - name: s02
         run: |
           echo ${{ env.tags }}
           echo "${{ env.tags }}"
