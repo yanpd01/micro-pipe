@@ -35,6 +35,7 @@ jobs:
 
 
   get-tags2:
+    needs: get-tags
     runs-on: ubuntu-20.04
     env:
       TZ: Asia/Shanghai
@@ -43,8 +44,9 @@ jobs:
       - name: s03
         run: |
           echo ${{ env.tags }}
-          echo "${{ env.tags }}"
-          echo " ${{ steps.s01.outputs.tags2 }}"
+          echo "${{ needs.get-tags.env.tags }}"
+          echo " ${{ needs.get-tags.steps.s01.outputs.tags2 }}"
+          echo " ${{ needs.get-tags.s01.outputs.tags2 }}"
 
   # push-docker-hub:
   #   needs: get-tags
