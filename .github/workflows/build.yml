@@ -8,6 +8,7 @@ on:
 
 env:
   IMAGE_NAME: micro-pipe #这是您的镜像名
+  VERSION: ${{ needs.get-tags.outputs.tags }}
 
 jobs:
   get-tags:
@@ -46,5 +47,5 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
